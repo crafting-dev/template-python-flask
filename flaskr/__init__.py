@@ -1,6 +1,8 @@
 import os
 
-from flask import Flask
+from flask import (
+    Flask, render_template
+)
 
 def create_app(test_config=None):
     """Create and configure an instance of the Flask application."""
@@ -25,6 +27,6 @@ def create_app(test_config=None):
 
     @app.route("/")
     def index():
-        return "Server listening on port 5000!"
+        return render_template('base.html')
 
     return app
