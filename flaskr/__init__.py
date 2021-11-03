@@ -1,8 +1,10 @@
 import os
 
 from flask import (
-    Flask, render_template
+    Flask, jsonify, request
 )
+
+from datetime import datetime
 
 def create_app(test_config=None):
     """Create and configure an instance of the Flask application."""
@@ -25,8 +27,11 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route("/")
-    def index():
-        return render_template('base.html')
+    @app.route('/ping')
+    def ping():
+        return jsonify(
+            ping=request.args.get('ping'),
+            received_at=datetime.utcnow(),
+        )
 
     return app
