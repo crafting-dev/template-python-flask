@@ -1,11 +1,11 @@
 hooks:
   build:
     cmd: ./sandbox.sh
-    env: 
-      - FLASK_APP=flaskr
-      - FLASK_ENV=development
     
 daemons:
   app:
     run:
-       cmd: python3 -m flask run --host=0.0.0.0 --port=3000
+      cmd: python3 -m flask run --host=0.0.0.0 --port=3000
+      env: 
+        - FLASK_APP=flaskr
+        - FLASK_ENV=development
