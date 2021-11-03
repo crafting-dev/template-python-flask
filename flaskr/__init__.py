@@ -1,10 +1,10 @@
 import os
 
+from datetime import datetime
+
 from flask import (
     Flask, jsonify, request
 )
-
-from datetime import datetime
 
 def create_app(test_config=None):
     """Create and configure an instance of the Flask application."""

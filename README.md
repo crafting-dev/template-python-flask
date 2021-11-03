@@ -8,10 +8,10 @@ This template defines a single `/ping` route.
 ```python
 @app.route('/ping')
 def ping():
-  return jsonify(
-    ping=request.args.get('ping'),
-    received_at=datetime.now(),
-  )
+    return jsonify(
+        ping=request.args.get('ping'),
+        received_at=datetime.now(),
+    )
 ```
 
 It accepts a ping query string, and responds with the query string and current time. For example:
