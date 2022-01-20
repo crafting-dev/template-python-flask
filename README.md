@@ -8,9 +8,12 @@ This template defines a single `/ping` route.
 ```python
 @app.route('/ping')
 def ping():
+    ping = request.args.get('ping')
+    if ping == "":
+        ping = 'To ping, or not to ping; that is the question.'
     return jsonify(
-        ping=request.args.get('ping'),
-        received_at=datetime.now(),
+        ping=ping,
+        received_at=datetime.utcnow(),
     )
 ```
 
