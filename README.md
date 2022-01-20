@@ -1,6 +1,6 @@
 # Python/Flask with MySQL template for Crafting Sandbox
 
-This is a Python/[Flask](https://flask.palletsprojects.com/en/2.0.x/) with MySQL template, configured for quick development setup in [Crafting Sandbox](https://crafting.readme.io/docs).
+This is a Python/[Flask](https://flask.palletsprojects.com/en/2.0.x/) with MySQL template, configured for quick development setup in [Crafting Sandbox](https://docs.sandboxes.cloud/docs).
 
 ## Specifications
 
@@ -41,37 +41,38 @@ You can launch the app by running:
 python3 -m flask run
 ```
 
-## App configuration
+## App Definition
 
-The following [App configuration](https://crafting.readme.io/docs/app-spec) was used to create this template:
+The following [App Definition](https://docs.sandboxes.cloud/docs/app-definition) was used to create this template:
 
 ```yaml
 endpoints:
-- http:
+- name: api
+  http:
     routes:
-    - backend:
-        port: http
+    - pathPrefix: "/"
+      backend:
         target: python-flask
-      path_prefix: /
-  name: app
-services:
-- description: Python/Flask template
-  name: python-flask
-  workspace:
-    checkouts:
-    - path: src/template-python-flask
-      repo:
-        git: https://github.com/crafting-dev/template-python-flask.git
-    ports:
-    - name: http
-      port: 3000
-      protocol: HTTP/TCP
-- managed_service:
-    properties:
-      database: superhero
-      password: batman
-      username: brucewayne
-    service_type: mysql
-    version: "8"
-  name: mysql
+        port: api
+    authProxy:
+      disabled: true
+workspaces:
+- name: python-flask
+  description: Template backend using Python/Flask
+  ports:
+  - name: api
+    port: 3000
+    protocol: HTTP/TCP
+  checkouts:
+  - path: backend
+    repo:
+      git: https://github.com/crafting-dev/template-python-flask
+dependencies:
+- name: mysql
+  serviceType: mysql
+  version: '8'
+  properties:
+    database: superhero
+    password: batman
+    username: brucewayne
 ```
